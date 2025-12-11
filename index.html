@@ -441,8 +441,11 @@ body{
 <body>
   <header class="nav-wrap">
     <nav class="container nav">
+      <div class="brand">
+        <img src="./assets/profile.jpeg" alt="Mukund portrait" class="brand-img" onerror="this.style.display='none'" />
+        <div class="brand-text">
           <h1>MUKUND KRISHNA K</h1>
-          <p class="muted">MCA • Web & Data</p>
+          <div class="muted">MCA • Web & Data</div>
         </div>
       </div>
 
@@ -462,7 +465,7 @@ body{
     <!-- Hero -->
     <section id="home" class="hero container">
       <div class="hero-left">
-        <h1 class="reveal">Hi, I'm <span class="accent">Mukund Krishna</span></h1>
+        <h1 class="reveal">Hi, I'm <span style="color:var(--accent)">Mukund Krishna</span></h1>
         <p class="big-text">
           A creative developer who enjoys building web projects, solving problems with Python, and thinking through ideas in a fresh, analytical way. I’ve got solid leadership skills and I’m currently exploring Kubernetes and cloud tech out of pure curiosity.
         </p>
@@ -481,7 +484,8 @@ body{
 
       <div class="hero-right reveal delay-1">
         <div class="portrait-frame">
-          <img src="C:\Users\mukun\OneDrive\Desktop\profile.jpeg" alt="Mukund portrait" class="portrait" />
+          <!-- Use a relative path to the image inside your repo (assets/profile.jpeg) -->
+          <img src="./assets/profile.jpeg" alt="Mukund portrait" class="portrait" onerror="this.src='./assets/profile-fallback.png'" />
         </div>
       </div>
     </section>
@@ -501,7 +505,7 @@ body{
       </p>
       <div class="quick-info">
         <div><strong>Location :</strong> Bengaluru, Karnataka</div>
-        <div><strong>Contact :</strong> +91 9632220113 • mukundkrishna0226@gmail.com</div>
+        <div><strong>Contact :</strong> <a href="tel:+919632220113">+91 9632220113</a> • <a href="mailto:mukundkrishna0226@gmail.com">mukundkrishna0226@gmail.com</a></div>
         <div><strong>Education :</strong> MCA — Alliance University (2024-2026)</div>
       </div>
     </section>
@@ -561,11 +565,11 @@ body{
     <section id="skills" class="container card section-anim">
       <h3>Technical Skills</h3>
       <div class="skills-grid">
-       <div class="skill-card">Python , Java</div>
+       <div class="skill-card">Python, Java</div>
        <div class="skill-card">HTML/CSS</div>
-       <div class="skill-card">My SQL</div>
-       <div class="skill-card">Figma , Adobe XD</div>
-       <div class="skill-card">VS Code , Android Studio</div>
+       <div class="skill-card">MySQL</div>
+       <div class="skill-card">Figma, Adobe XD</div>
+       <div class="skill-card">VS Code, Android Studio</div>
        <div class="skill-card">Machine Learning</div>
       </div>
 
@@ -577,8 +581,8 @@ body{
       <p>Preview, upload a new PDF version, or download my resume.</p>
 
       <div class="resume-actions">
-        <!-- Download link (static file) -->
-        <a id="downloadResume" class="btn" href="C:\Users\mukun\OneDrive\Desktop\assetsMukund_Resume.pdf" download>Download Resume (PDF)</a>
+        <!-- Download link (must point to file inside your repo; put the PDF at ./assets/Mukund_Resume.pdf) -->
+        
 
         <!-- Simple upload to preview locally in browser (no server) -->
         <label class="file-input">
@@ -590,9 +594,9 @@ body{
       <div id="pdfPreview" class="pdf-preview hidden">
         <div class="pdf-toolbar">
           <button id="closePreview" class="btn outline small">Close Preview</button>
-          <a id="downloadPreview" class="btn small" href="C:\Users\mukun\OneDrive\Desktop\assetsMukund_Resume.pdf" download="MUKUND KRISHNA K ( ATS ).pdf">Download this PDF</a>
+          
         </div>
-        <iframe id="pdfFrame" title="Resume preview" src="C:\Users\mukun\OneDrive\Desktop\assetsMukund_Resume.pdf"></iframe>
+        <iframe id="pdfFrame" title="Resume preview" src="./assets/Mukund_Resume.pdf"></iframe>
       </div>
     </section>
 
@@ -616,8 +620,8 @@ body{
     </section>
 
     <footer class="container footer">
-      <p>© <span id="year"></span>Registered to Mukund Krishna K ⚡</p>
-      <p></span>Code. Create. Evolve</p>
+      <p>© <span id="year"></span> Registered to Mukund Krishna K ⚡</p>
+      <p>Code. Create. Evolve</p>
 
     </footer>
   </main>
@@ -713,7 +717,7 @@ document.addEventListener('DOMContentLoaded', () => {
     portrait.addEventListener('mouseleave', ()=> portrait.style.transform = 'none');
   }
 
-  // demo contact form
+  // demo contact form - if you add an actual form with id="contactForm" this will handle it
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', (evt) => {
@@ -785,4 +789,3 @@ window.addEventListener('click', function(event) {
   </script>
 </body>
 </html>
-
