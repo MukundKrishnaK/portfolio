@@ -18,7 +18,6 @@
   --txt: #f7f5f2;             /* off-white */
   --gap: 1.25rem;
   --container: 1100px;
-  /* tonal accents for subtle gradients */
   --accent-2: #b89230;
   --shadow-dark: rgba(0,0,0,0.55);
 }
@@ -98,14 +97,23 @@ body{
   align-items: center;
 }
 
+/* portrait is now a styled initial rather than an image */
 .portrait {
   width: 320px;
   height: 320px;
-  object-fit: cover;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border-radius: 50%;
-  border: 6px solid #d4af37;   /* gold glow */
+  border: 6px solid #d4af37;   /* gold ring */
   box-shadow: 0 0 28px rgba(212,175,55,0.45);
+  background: linear-gradient(180deg, rgba(212,175,55,0.10), rgba(212,175,55,0.04));
+  font-size: 96px;
+  font-weight: 800;
+  color: #0a0a0a;
+  letter-spacing: 2px;
   transition: transform .4s ease;
+  user-select: none;
 }
 
 .portrait:hover {
@@ -122,6 +130,12 @@ body{
 
   .hero-left {
     text-align: center;
+  }
+
+  .portrait {
+    width: 220px;
+    height: 220px;
+    font-size: 64px;
   }
 }
 
@@ -275,22 +289,6 @@ body{
   box-shadow: 0 12px 35px rgba(180,145,40,0.18);
 }
 
-
-/* resume */
-.resume-section h3{margin-top:0;margin-bottom:0.75rem}
-.resume-section > p{color:var(--muted);margin-bottom:1.5rem}
-.resume-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem}
-.file-input{display:inline-block;cursor:pointer;background:rgba(180,145,40,0.1);border:1px solid rgba(180,145,40,0.3);padding:.6rem .9rem;border-radius:10px;color:var(--txt);font-weight:500;transition:all .28s ease}
-.file-input:hover{background:rgba(180,145,40,0.2);border-color:rgba(180,145,40,0.5)}
-.file-input input{display:none}
-.pdf-preview{margin-top:2rem;border-radius:12px;overflow:hidden;border:1px solid rgba(180,145,40,0.15);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
-.pdf-toolbar{display:flex;justify-content:space-between;align-items:center;padding:1rem;background:linear-gradient(90deg,rgba(180,145,40,0.1),rgba(212,175,55,0.05));border-bottom:1px solid rgba(180,145,40,0.1)}
-.pdf-preview iframe{width:100%;height:600px;border:0;display:block}
-
-.hidden {
-    display: none !important;
-}
-
 /* contact form */
 .contact-form p{color:var(--muted);margin-bottom:1.5rem}
 .contact-form .row{display:flex;gap:1rem}
@@ -436,24 +434,27 @@ body{
 /* skill bars animate */
 .skill .bar span{width:0}
 .skill.animate .bar span{width:var(--pct)}
+
+/* small helper */
+.accent { color: var(--accent); font-weight:700; }
   </style>
 </head>
 <body>
   <header class="nav-wrap">
     <nav class="container nav">
-      <div class="brand">
-        <img src="./assets/profile.jpeg" alt="Mukund portrait" class="brand-img" onerror="this.style.display='none'" />
-        <div class="brand-text">
-          <h1>MUKUND KRISHNA K</h1>
-          <div class="muted">MCA • Web & Data</div>
+      <div style="display:flex;gap:0.75rem;align-items:center">
+        <div class="brand-img" style="width:48px;height:48px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#111">MK</div>
+        <div style="line-height:1">
+          <h1 style="margin:0">MUKUND KRISHNA K</h1>
+          <div class="brand-text muted" style="color:var(--muted);font-size:.78rem">MCA • Web & Data</div>
         </div>
       </div>
 
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
 
@@ -465,27 +466,25 @@ body{
     <!-- Hero -->
     <section id="home" class="hero container">
       <div class="hero-left">
-        <h1 class="reveal">Hi, I'm <span style="color:var(--accent)">Mukund Krishna</span></h1>
+        <h1 class="reveal">Hi, I'm <span class="accent">Mukund Krishna</span></h1>
         <p class="big-text">
           A creative developer who enjoys building web projects, solving problems with Python, and thinking through ideas in a fresh, analytical way. I’ve got solid leadership skills and I’m currently exploring Kubernetes and cloud tech out of pure curiosity.
         </p>
         <div class="cta reveal delay-2">
           <a class="btn" href="#projects">See Projects</a>
-          <a class="btn outline" href="#resume">Download Resume</a>
         </div>
 
-        <div class="stats reveal delay-3">
-          <div><strong></strong><span></span></div>
-          <div><strong></strong><span></span></div>
-          <div><strong></strong><span></span></div>
+        <div class="stats reveal delay-3" aria-hidden="true" style="display:flex;gap:1rem;margin-top:0.8rem">
+          <div><strong class="accent">3+</strong><div style="color:var(--muted)">Projects</div></div>
+          <div><strong class="accent">MCA</strong><div style="color:var(--muted)">2024–2026</div></div>
+          <div><strong class="accent">Bengaluru</strong><div style="color:var(--muted)">Location</div></div>
         </div>
       </div>
 
-
       <div class="hero-right reveal delay-1">
         <div class="portrait-frame">
-          <!-- Use a relative path to the image inside your repo (assets/profile.jpeg) -->
-          <img src="./assets/profile.jpeg" alt="Mukund portrait" class="portrait" onerror="this.src='./assets/profile-fallback.png'" />
+          <!-- Initial-based portrait (no external images) -->
+          <div class="portrait" aria-hidden="false">MK</div>
         </div>
       </div>
     </section>
@@ -503,10 +502,31 @@ body{
         in Kubernetes and cloud technologies. Ready to work in any
         environment while delivering efficient, scalable digital solutions.
       </p>
-      <div class="quick-info">
+      <div class="quick-info about-info">
         <div><strong>Location :</strong> Bengaluru, Karnataka</div>
-        <div><strong>Contact :</strong> <a href="tel:+919632220113">+91 9632220113</a> • <a href="mailto:mukundkrishna0226@gmail.com">mukundkrishna0226@gmail.com</a></div>
+        <div><strong>Contact :</strong> <a href="tel:+919632220113" style="color:var(--txt)">+91 9632220113</a> • <a href="mailto:mukundkrishna0226@gmail.com" style="color:var(--txt)">mukundkrishna0226@gmail.com</a></div>
         <div><strong>Education :</strong> MCA — Alliance University (2024-2026)</div>
+      </div>
+    </section>
+
+    <!-- Experience (NEW) -->
+    <section id="experience" class="container card section-anim">
+      <h3>Experience</h3>
+      <div style="display:grid;gap:0.75rem">
+        <div>
+          <strong>Customer Experience Agent</strong> <span style="color:var(--muted)">| Alorica — Bengaluru</span><br>
+          <small style="color:var(--muted)">Feb 2024 – Aug 2024</small>
+          <p style="margin:0.5rem 0;color:var(--muted)">
+            Decreased average customer resolution time by <strong>~5 minutes</strong> by improving issue diagnosis and implementing efficient troubleshooting workflows, driving measurable improvements in customer satisfaction and internal process metrics.
+          </p>
+        </div>
+
+        <!-- optional: small bullet list of responsibilities -->
+        <ul style="margin:0.5rem 0 0 1.1rem;color:var(--muted)">
+          <li>Handled high-volume inbound customer queries across channels and tracked outcome metrics.</li>
+          <li>Documented common issues and worked with QA/ops to reduce repeat escalations.</li>
+          <li>Provided feedback to the product/support teams to improve knowledge-base content.</li>
+        </ul>
       </div>
     </section>
 
@@ -561,42 +581,36 @@ body{
       </div>
     </div>
 
-    <!-- Skills -->
+    <!-- Skills + Soft Skills -->
     <section id="skills" class="container card section-anim">
       <h3>Technical Skills</h3>
       <div class="skills-grid">
        <div class="skill-card">Python, Java</div>
-       <div class="skill-card">HTML/CSS</div>
+       <div class="skill-card">HTML / CSS / JS</div>
        <div class="skill-card">MySQL</div>
        <div class="skill-card">Figma, Adobe XD</div>
        <div class="skill-card">VS Code, Android Studio</div>
        <div class="skill-card">Machine Learning</div>
       </div>
 
-    </section>
-
-    <!-- Resume section -->
-    <section id="resume" class="container card section-anim resume-section">
-      <h3>Resume</h3>
-      <p>Preview, upload a new PDF version, or download my resume.</p>
-
-      <div class="resume-actions">
-        <!-- Download link (must point to file inside your repo; put the PDF at ./assets/Mukund_Resume.pdf) -->
-        
-
-        <!-- Simple upload to preview locally in browser (no server) -->
-        <label class="file-input">
-          <input id="fileInput" type="file" accept="application/pdf" />
-          Upload & Preview PDF
-        </label>
+      <!-- Soft skills block (added) -->
+      <h4 style="margin-top:1.5rem;margin-bottom:.6rem">Soft Skills</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:.6rem">
+        <div class="skill-card" style="min-width:160px">Multitasking</div>
+        <div class="skill-card" style="min-width:160px">Problem Solving</div>
+        <div class="skill-card" style="min-width:160px">Team Collaboration</div>
+        <div class="skill-card" style="min-width:160px">Complaint Handling</div>
       </div>
 
-      <div id="pdfPreview" class="pdf-preview hidden">
-        <div class="pdf-toolbar">
-          <button id="closePreview" class="btn outline small">Close Preview</button>
-          
-        </div>
-        <iframe id="pdfFrame" title="Resume preview" src="./assets/Mukund_Resume.pdf"></iframe>
+      <!-- Languages -->
+      <h4 style="margin-top:1.25rem;margin-bottom:.6rem">Languages</h4>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;color:var(--muted)">
+        <div class="skill-card" style="min-width:140px">English</div>
+        <div class="skill-card" style="min-width:140px">Malayalam</div>
+        <div class="skill-card" style="min-width:140px">Kannada</div>
+        <div class="skill-card" style="min-width:140px">Hindi</div>
+        <div class="skill-card" style="min-width:140px">Tamil</div>
+        <div class="skill-card" style="min-width:140px">Telugu</div>
       </div>
     </section>
 
@@ -622,7 +636,6 @@ body{
     <footer class="container footer">
       <p>© <span id="year"></span> Registered to Mukund Krishna K ⚡</p>
       <p>Code. Create. Evolve</p>
-
     </footer>
   </main>
 
@@ -648,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // pdf preview handlers
+  // pdf preview handlers (kept in case you add a PDF upload UI)
   const fileInput = document.getElementById('fileInput');
   const pdfPreview = document.getElementById('pdfPreview');
   const pdfFrame = document.getElementById('pdfFrame');
@@ -671,6 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (pdfPreview) {
         pdfPreview.classList.remove('hidden');
+        pdfPreview.setAttribute('aria-hidden','false');
         pdfPreview.scrollIntoView({behavior:'smooth'});
       }
     });
@@ -679,7 +693,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closePreview) {
     closePreview.addEventListener('click', () => {
       if (pdfPreview) pdfPreview.classList.add('hidden');
+      pdfPreview.setAttribute('aria-hidden','true');
       try { if (pdfFrame) URL.revokeObjectURL(pdfFrame.src); } catch(e){}
+      // reset iframe to Drive preview (if you prefer)
+      if (pdfFrame) pdfFrame.src = "https://drive.google.com/file/d/1FRTY7DqUkGDZrBJBfefKgVWiHNPKGAEY/preview";
     });
   }
 
@@ -710,14 +727,14 @@ document.addEventListener('DOMContentLoaded', () => {
     skillsObserver.observe(skillsSection);
   }
 
-  // portrait transform on hover (already handled via CSS hover, but keep JS for some transforms)
+  // portrait transform on hover - still works for the MK initial
   const portrait = document.querySelector('.portrait');
   if (portrait) {
     portrait.addEventListener('mouseenter', ()=> portrait.style.transform = 'translateY(-8px) rotate(-1deg)');
     portrait.addEventListener('mouseleave', ()=> portrait.style.transform = 'none');
   }
 
-  // demo contact form - if you add an actual form with id="contactForm" this will handle it
+  // demo contact form
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', (evt) => {
